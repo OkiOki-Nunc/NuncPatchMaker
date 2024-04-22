@@ -1,0 +1,34 @@
+set pagesize 200
+set heading off
+set echo off
+
+spool "C:\Cloud\OneDrive - IN2 d.o.o. Koper\janus_razvoj\MARSIKAJ\NuncPatchMaker\alter_invalid.sql"
+
+select 'alter package ' || substr(objecT_name,1,60) || ' compile package;'
+from user_objects
+where status = 'INVALID' and
+object_type = 'PACKAGE'
+order by object_type, object_name;
+
+select 'alter package ' || substr(objecT_name,1,60) || ' compile body;'
+from user_objects
+where status = 'INVALID' and
+object_type = 'PACKAGE BODY'
+order by object_type, object_name;
+
+select 'alter ' || object_type ||' ' || substr(objecT_name,1,60) || ' compile;'
+from user_objects
+where status = 'INVALID' and
+objecT_type not in ( 'PACKAGE', 'PACKAGE BODY' )
+order by object_type, object_name;
+
+select 'Prompt ' from dual;
+select 'Prompt --------------------------------------------------' from dual;
+select 'Prompt Invalidni paketi:' from dual;
+select 'select substr(object_name,1,60)
+from user_objects where status = ''INVALID''
+and object_type like ''PACKAGE%'' order by object_type, object_name; '
+from dual;
+select 'Prompt --------------------------------------------------' from dual;
+
+spool off

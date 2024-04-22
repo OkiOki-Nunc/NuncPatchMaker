@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Rsrc-Class-Path: ./ commons-compress-1.4.1.jar
+Class-Path: .
+Rsrc-Main-Class: runNunc
+Main-Class: org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader
+
